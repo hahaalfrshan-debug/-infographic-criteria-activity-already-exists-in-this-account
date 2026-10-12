@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>تحدّي معايير الإنفوجرافيك</title>
+<style>
+:root{--navy:#183b56;--blue:#3c91c9;--teal:#4b9c99;--cream:#fffaf1;--pink:#f2a6a0;--lav:#b9b4e8;--green:#43876d;--ink:#213547}
+*{box-sizing:border-box}
+body{margin:0;font-family:Tahoma,Arial,sans-serif;background:linear-gradient(135deg,#fff8ed,#eef8fa);color:var(--ink);line-height:1.8}
+header{padding:32px 18px 26px;text-align:center;background:linear-gradient(120deg,#dcecfb,#f7e6e0);border-radius:0 0 32px 32px}
+header .badge{display:inline-block;background:#fff;padding:5px 16px;border-radius:30px;color:var(--navy);font-weight:bold}
+h1{margin:10px 0;color:var(--navy);font-size:clamp(1.7rem,4vw,2.6rem)}
+header p{margin:0 auto;max-width:720px}
+.wrap{max-width:960px;margin:22px auto;padding:0 14px}
+.panel{background:#fff;border:1px solid #e5eaf0;border-radius:24px;padding:22px;box-shadow:0 8px 25px #27445b10;margin-bottom:18px}
+.introgrid{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:center}
+.visual{min-height:210px;background:#f0f8fa;border-radius:18px;display:flex;align-items:center;justify-content:center;padding:12px;overflow:hidden}
+.visual svg{width:100%;max-width:420px;height:auto}
+.startbtn,.nextbtn,.restart{border:0;border-radius:14px;background:var(--navy);color:white;padding:12px 22px;font-size:1rem;font-weight:bold;cursor:pointer}
+.startbtn:hover,.nextbtn:hover,.restart:hover{filter:brightness(1.12)}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.pill{background:#e8f3f6;border-radius:20px;padding:4px 12px;font-size:.9rem}
+.hidden{display:none!important}
+.topline{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap}
+.progress{height:9px;background:#e7edf0;border-radius:10px;overflow:hidden;margin:12px 0 20px}
+.progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--teal));transition:width .3s}
+.qtitle{font-size:1.25rem;color:var(--navy);margin:0 0 12px}
+.options{display:grid;gap:10px;margin-top:16px}
+.option{background:#fff;border:2px solid #dce7ed;border-radius:14px;padding:12px 15px;text-align:right;font:inherit;cursor:pointer;transition:.15s}
+.option:hover{border-color:var(--blue);background:#f5fbff}
+.option:disabled{cursor:default}
+.option.correct{border-color:#4a9b72;background:#edf9f1}
+.option.wrong{border-color:#d76f6f;background:#fff0ef}
+.feedback{margin-top:14px;padding:12px 15px;border-radius:14px;font-weight:bold}
+.feedback.good{background:#e9f8ef;color:#246844}.feedback.bad{background:#fff0ef;color:#9a3434}
+.footerrow{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:18px;flex-wrap:wrap}
+.small{font-size:.92rem;color:#5c7180}
+.result{text-align:center;padding:24px}
+.score{font-size:2.8rem;color:var(--teal);font-weight:bold}
+.result ul{text-align:right;max-width:500px;margin:18px auto}
+.animated-demo{animation:float 2.5s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+.drop{animation:drop 1.8s ease-in-out infinite}
+@keyframes drop{0%,100%{transform:translateY(-3px);opacity:.4}50%{transform:translateY(8px);opacity:1}}
+@media(max-width:700px){.introgrid{grid-template-columns:1fr}.panel{padding:16px}.visual{min-height:160px}}
+</style>
+</head>
+<body>
+<header>
+  <span class="badge">نشاط تفاعلي • تقنيات التعليم</span>
+  <h1>🔎 تحدّي معايير الإنفوجرافيك</h1>
+  <p>هل تستطيعين اختيار التصميم الأفضل؟ اختبري معرفتك بمعايير المحتوى، والتنظيم، والخطوط والألوان، والصور، وجودة الإخراج.</p>
+</header>
+<main class="wrap">
+  <section id="intro" class="panel introgrid">
+    <div>
+      <h2 style="color:var(--navy);margin-top:0">مهمتكِ يا محققة التصميم!</h2>
+      <p>شاهدي المثال في كل سؤال، ثم اختاري الإجابة الأنسب. ستحصلين على تغذية راجعة مباشرة ونتيجة نهائية من 6 نقاط.</p>
+      <div class="pills"><span class="pill">6 أسئلة</span><span class="pill">اختيار من متعدد</span><span class="pill">نتيجة فورية</span></div>
+      <button class="startbtn" onclick="startQuiz()">ابدئي التحدّي ←</button>
+      <p class="small">تلميح: التصميم الجيد يجعل المعلومة واضحة وسهلة الفهم، ولا يكتفي بالزخرفة.</p>
+    </div>
+    <div class="visual">
+      <svg viewBox="0 0 420 240" role="img" aria-label="رسم توضيحي لإنفوجرافيك">
+        <rect x="76" y="18" width="270" height="205" rx="18" fill="#fff" stroke="#b8dce8" stroke-width="3"/>
+        <rect x="100" y="38" width="220" height="26" rx="8" fill="#3c91c9"/>
+        <circle cx="125" cy="104" r="27" fill="#f2b6a7"/><path d="M111 104l10 10 20-23" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/>
+        <rect x="166" y="88" width="145" height="10" rx="5" fill="#4b9c99"/><rect x="166" y="107" width="118" height="7" rx="4" fill="#c9dce4"/>
+        <rect x="101" y="151" width="210" height="11" rx="5" fill="#b9b4e8"/><rect x="101" y="171" width="177" height="7" rx="4" fill="#d9e4e9"/>
+        <circle cx="310" cy="195" r="12" fill="#f2a6a0"/><path d="M304 195l5 5 8-10" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+        <path d="M43 53l10-10m-10 10l-9-9m9 9v-16" stroke="#f0b94f" stroke-width="4" stroke-linecap="round"/>
+      </svg>
+    </div>
+  </section>
+
+  <section id="quiz" class="panel hidden">
+    <div class="topline"><strong id="counter">السؤال 1 من 6</strong><span class="pill" id="scorelabel">النتيجة: 0</span></div>
+    <div class="progress"><span id="progressbar"></span></div>
+    <div id="questionvisual" class="visual" style="margin-bottom:16px"></div>
+    <h2 id="question" class="qtitle"></h2>
+    <div id="options" class="options"></div>
+    <div id="feedback" class="feedback hidden" aria-live="polite"></div>
+    <div class="footerrow"><span class="small" id="hint">اختاري إجابة واحدة.</span><button id="next" class="nextbtn hidden" onclick="nextQuestion()">السؤال التالي ←</button></div>
+  </section>
+
+  <section id="result" class="panel result hidden">
+    <h2 style="color:var(--navy)">انتهى التحدّي! 🎉</h2>
+    <div class="score" id="finalscore">0 / 6</div>
+    <p id="resultmessage"></p>
+    <ul id="review"></ul>
+    <button class="restart" onclick="restartQuiz()">إعادة المحاولة ↻</button>
+    <p class="small">يمكنكِ أخذ لقطة شاشة لنتيجتكِ أو إعادة النشاط لتحسين درجتكِ.</p>
+  </section>
+  <p class="small" style="text-align:center">إعداد نشاط تعليمي عن معايير تصميم وإنتاج الإنفوجرافيك.</p>
+</main>
+<script>
+const questions = [
+ {title:"1. معيار المحتوى", desc:"إنفوجرافيك عن التغذية الصحية يحتوي على معلومات صحيحة ومرتبطة بالهدف التعليمي.", visual:"content", options:["اختيار معلومات مناسبة للموضوع والهدف","إضافة أكبر قدر ممكن من المعلومات حتى لو تكررت","الاهتمام بالزخرفة فقط"], correct:0, feedback:"صحيح! يجب أن تكون المعلومات دقيقة ومرتبطة بموضوع الإنفوجرافيك وهدفه."},
+ {title:"2. معيار الألوان", desc:"لاحظي مثال التصميم التالي: ألوان هادئة ومتناسقة مع تباين واضح للنص.", visual:"colors", options:["اختيار ألوان كثيرة وغير متناسقة","استخدام ألوان متناسقة تساعد على القراءة","جعل لون النص قريبًا جدًا من لون الخلفية"], correct:1, feedback:"أحسنتِ! التناسق والتباين المناسب يساعدان على وضوح المعلومات."},
+ {title:"3. معيار الخطوط", desc:"في المثال، النص صغير جدًا ويصعب قراءته على شاشة الهاتف.", visual:"fonts", options:["تصغير الخط أكثر لتوفير المساحة","استخدام أنواع كثيرة من الخطوط","اختيار خط واضح وحجم مناسب للقراءة"], correct:2, feedback:"صحيح! يجب أن تكون الخطوط واضحة وأحجامها مناسبة للجمهور وطريقة العرض."},
+ {title:"4. معيار الصور والرموز", desc:"إنفوجرافيك عن ترشيد الماء يتضمن صورة حذاء لا علاقة لها بالموضوع.", visual:"images", options:["استبدالها بصورة أو رمز يخدم موضوع ترشيد الماء","الإبقاء عليها لأنها تملأ مساحة فارغة","إضافة صور عشوائية أخرى"], correct:0, feedback:"صحيح! ينبغي أن توضح الصور والرموز المحتوى وتدعمه، لا أن تشتت المتعلم."},
+ {title:"5. معيار التنظيم والترتيب", desc:"المعلومات موزعة بشكل عشوائي ولا تعرف الطالبة من أين تبدأ القراءة.", visual:"order", options:["إضافة فقرات طويلة في كل مكان","تنظيم العناصر بتسلسل واضح ومساحات مناسبة","تكبير كل الصور دون تغيير ترتيبها"], correct:1, feedback:"أحسنتِ! الترتيب البصري والتسلسل الواضح يساعدان على متابعة المعلومات وفهمها."},
+ {title:"6. معيار جودة الإخراج والنشر", desc:"قبل مشاركة الإنفوجرافيك، ما الخطوة الأفضل؟", visual:"quality", options:["نشره فورًا دون مراجعة","حذف المصادر لتقليل النص","مراجعة وضوح العناصر وجودة الملف وتوثيق المصادر"], correct:2, feedback:"صحيح! من المهم مراجعة جودة التصميم ووضوحه ومراعاة توثيق مصادر المعلومات."}
+];
+let index=0, score=0, answered=false;
+function art(type){
+ const commonStart='<svg viewBox="0 0 420 190" role="img" aria-label="مثال بصري للمعيار">';
+ const end='</svg>';
+ const arts={
+ content:'<rect x="75" y="12" width="270" height="166" rx="16" fill="#fff" stroke="#c8dfe8" stroke-width="3"/><rect x="96" y="27" width="228" height="23" rx="7" fill="#3c91c9"/><circle cx="130" cy="87" r="24" fill="#f4c66b"/><path d="M117 87l9 9 18-21" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round"/><rect x="166" y="70" width="140" height="9" rx="4" fill="#4b9c99"/><rect x="166" y="87" width="112" height="7" rx="4" fill="#c7d8df"/><rect x="98" y="125" width="210" height="8" rx="4" fill="#b9b4e8"/><rect x="98" y="141" width="170" height="7" rx="4" fill="#d9e5e9"/>',
+ colors:'<rect x="35" y="20" width="350" height="150" rx="18" fill="#fff" stroke="#c8dfe8" stroke-width="3"/><rect x="55" y="37" width="310" height="28" rx="8" fill="#285b78"/><circle cx="100" cy="105" r="23" fill="#4b9c99"/><circle cx="165" cy="105" r="23" fill="#f2b5a7"/><circle cx="230" cy="105" r="23" fill="#b9b4e8"/><circle cx="295" cy="105" r="23" fill="#f0c96a"/><path d="M85 105h30M150 105h30M215 105h30M280 105h30" stroke="#fff" stroke-width="4" stroke-linecap="round"/>',
+ fonts:'<rect x="40" y="18" width="340" height="155" rx="16" fill="#fff" stroke="#c8dfe8" stroke-width="3"/><rect x="60" y="34" width="300" height="24" rx="7" fill="#3c91c9"/><text x="210" y="91" text-anchor="middle" font-size="12" fill="#183b56">خط صغير جدًا يصعب قراءته</text><rect x="68" y="108" width="280" height="8" rx="4" fill="#b9b4e8"/><rect x="68" y="126" width="240" height="8" rx="4" fill="#d9e5e9"/><circle cx="328" cy="145" r="10" fill="#f2a6a0"/>',
+ images:'<rect x="40" y="18" width="340" height="155" rx="16" fill="#fff" stroke="#c8dfe8" stroke-width="3"/><rect x="60" y="32" width="300" height="22" rx="7" fill="#3c91c9"/><path d="M105 125 C80 92 100 72 122 91 C145 66 166 93 143 125Z" fill="#4b9c99"/><path d="M125 124v-29" stroke="#276f61" stroke-width="4"/><path d="M238 85l22 22m0-22l-22 22" stroke="#f2a6a0" stroke-width="8" stroke-linecap="round"/><rect x="220" y="122" width="60" height="12" rx="6" fill="#b9b4e8"/><text x="125" y="151" text-anchor="middle" font-size="13" fill="#183b56">ماء</text><text x="250" y="151" text-anchor="middle" font-size="13" fill="#183b56">صورة غير مرتبطة</text>',
+ order:'<rect x="38" y="18" width="344" height="155" rx="16" fill="#fff" stroke="#c8dfe8" stroke-width="3"/><circle cx="105" cy="70" r="22" fill="#f2a6a0"/><rect x="148" y="55" width="170" height="10" rx="5" fill="#4b9c99"/><rect x="90" y="111" width="130" height="10" rx="5" fill="#b9b4e8"/><circle cx="287" cy="120" r="20" fill="#f0c96a"/><rect x="125" y="143" width="190" height="7" rx="4" fill="#d9e5e9"/><path d="M120 83L170 108M260 85L230 108" stroke="#e29a87" stroke-width="3" stroke-dasharray="5 5"/>',
+ quality:'<rect x="75" y="12" width="270" height="166" rx="16" fill="#fff" stroke="#c8dfe8" stroke-width="3"/><rect x="95" y="28" width="230" height="22" rx="7" fill="#3c91c9"/><rect x="98" y="65" width="140" height="8" rx="4" fill="#4b9c99"/><rect x="98" y="82" width="185" height="7" rx="4" fill="#c7d8df"/><rect x="98" y="98" width="165" height="7" rx="4" fill="#c7d8df"/><circle cx="290" cy="113" r="20" fill="#edf8ef" stroke="#4b9c72" stroke-width="3"/><path d="M280 113l7 7 13-16" stroke="#4b9c72" stroke-width="4" fill="none" stroke-linecap="round"/><text x="210" y="151" text-anchor="middle" font-size="13" fill="#183b56">مراجعة + مصادر</text>'
+ };
+ return commonStart+arts[type]+end;
+}
+function startQuiz(){document.getElementById('intro').classList.add('hidden');document.getElementById('result').classList.add('hidden');document.getElementById('quiz').classList.remove('hidden');index=0;score=0;render();}
+function render(){
+ answered=false;const q=questions[index];
+ document.getElementById('counter').textContent=`السؤال ${index+1} من ${questions.length}`;
+ document.getElementById('scorelabel').textContent=`النتيجة: ${score}`;
+ document.getElementById('progressbar').style.width=`${index/questions.length*100}%`;
+ document.getElementById('questionvisual').innerHTML=art(q.visual);
+ document.getElementById('question').textContent=q.title+' — '+q.desc;
+ document.getElementById('feedback').className='feedback hidden';
+ document.getElementById('next').classList.add('hidden');
+ document.getElementById('hint').textContent='اختاري إجابة واحدة.';
+ const box=document.getElementById('options');box.innerHTML='';
+ q.options.forEach((opt,i)=>{const b=document.createElement('button');b.className='option';b.textContent=String.fromCharCode(0x623+i)+') '+opt;b.onclick=()=>choose(i,b);box.appendChild(b);});
+}
+function choose(choice,button){
+ if(answered)return;answered=true;const q=questions[index];const buttons=[...document.querySelectorAll('.option')];
+ buttons.forEach((b,i)=>{b.disabled=true;if(i===q.correct)b.classList.add('correct');});
+ const fb=document.getElementById('feedback');fb.classList.remove('hidden');
+ if(choice===q.correct){score++;fb.classList.add('good');fb.textContent='✅ '+q.feedback;}else{button.classList.add('wrong');fb.classList.add('bad');fb.textContent='❌ ليست الإجابة الأنسب. '+q.feedback;}
+ document.getElementById('scorelabel').textContent=`النتيجة: ${score}`;
+ document.getElementById('progressbar').style.width=`${(index+1)/questions.length*100}%`;
+ document.getElementById('next').classList.remove('hidden');document.getElementById('next').textContent=index===questions.length-1?'عرض النتيجة ←':'السؤال التالي ←';
+}
+function nextQuestion(){if(index<questions.length-1){index++;render();}else{showResult();}}
+function showResult(){
+ document.getElementById('quiz').classList.add('hidden');document.getElementById('result').classList.remove('hidden');
+ document.getElementById('finalscore').textContent=`${score} / ${questions.length}`;
+ document.getElementById('resultmessage').textContent=score===6?'ممتاز! أتقنتِ معايير تصميم الإنفوجرافيك. 🌟':score>=4?'عمل رائع! راجعي المعايير التي تحتاج إلى تعزيز ثم جرّبي مرة أخرى.':'لا بأس، الممارسة تصنع الفرق! راجعي معايير المحتوى والتصميم ثم أعيدي التحدي.';
+ const review=document.getElementById('review');review.innerHTML='';
+ questions.forEach((q,i)=>{const li=document.createElement('li');li.textContent=q.title;review.appendChild(li);});
+}
+function restartQuiz(){startQuiz();}
+</script>
+</body>
+</html>
